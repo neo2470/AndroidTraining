@@ -24,6 +24,6 @@ public class TitleBar extends RelativeLayout {
 
     public void setTitle(String text) {
         TextView title = (TextView) findViewById(R.id.title);
-        title.setText(text);
+        title.setText(text.trim());
     }
 }

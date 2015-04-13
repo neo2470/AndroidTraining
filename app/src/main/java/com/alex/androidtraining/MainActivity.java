@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 public class MainActivity extends BaseActivity {
 
@@ -30,20 +29,15 @@ public class MainActivity extends BaseActivity {
     private void startActivity(int id) {
         Class act = null;
         switch (id) {
-            case 0:
-                act = null;
-                break;
             case 1:
-                act = null;
+                act = FirstAppActivity.class;
                 break;
             case 2:
                 act = null;
                 break;
         }
 
-        if (null == act) {
-            Toast.makeText(this, getString(R.string.not_finished), Toast.LENGTH_SHORT).show();
-        } else {
+        if (null != act) {
             Intent intent = new Intent(this, act);
             intent.putExtra("topic", data[id]);
             startActivity(intent);
@@ -51,20 +45,34 @@ public class MainActivity extends BaseActivity {
     }
 
     private final String[] data = {
+
             "Getting Started",
+            "           Building Your First App",
+            "           Adding the Action Bar",
+            "           Supporting Different Devices",
+            "           Managing the Activity Lifecycle",
+            "           Building a Dynamic UI with Fragment",
+            "           Saving Data",
+            "           Interacting with Other Apps",
+
             "Content Sharing",
+            "           Sharing Simple Data",
+            "           Sharing Files",
+            "           Sharing Files with NFC",
+
             "Multimedia",
+            "           Managing Audio Playback",
+            "           Capturing Photos",
+            "           Printing Content",
+
             "Graphic & Animation",
+            "           Displaying Bitmaps Efficiently",
+            "           Displaying Graphics with OpenGL ES",
+            "           Animating Views Using Scenes and Transitions",
+            "           Adding Animations",
+
             "Connectivity & the Cloud",
+
             "User info & Location",
-            "Wearable",
-            "Interaction & Engagement",
-            "User Interface",
-            "User Input",
-            "Background Jobs",
-            "Performance",
-            "Security & Privacy",
-            "Testing",
-            "Distribute & Monetize"
     };
 }
