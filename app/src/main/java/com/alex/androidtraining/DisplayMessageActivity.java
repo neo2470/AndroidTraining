@@ -15,11 +15,12 @@ public class DisplayMessageActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        String msg = intent.getStringExtra(FirstAppActivity.EXTRA_MESSAGE);
+        String msg = intent.getStringExtra(BuildingFirstAppActivity.EXTRA_MESSAGE);
         TextView tv = new TextView(this);
         tv.setTextSize(40);
         tv.setText(msg);
 
         setContentView(tv);
+        getActionBar().setDisplayHomeAsUpEnabled(false);
     }
 }

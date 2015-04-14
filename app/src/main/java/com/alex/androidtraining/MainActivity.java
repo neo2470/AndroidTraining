@@ -30,10 +30,10 @@ public class MainActivity extends BaseActivity {
         Class act = null;
         switch (id) {
             case 1:
-                act = FirstAppActivity.class;
+                act = BuildingFirstAppActivity.class;
                 break;
             case 2:
-                act = null;
+                act = AddingActionBarActivity.class;
                 break;
         }
 

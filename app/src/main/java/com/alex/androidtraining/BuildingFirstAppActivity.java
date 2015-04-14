@@ -9,12 +9,12 @@ import android.widget.EditText;
  * Created by alex on 15-4-13.
  * Getting Started / Building Your First App
  */
-public class FirstAppActivity extends BaseActivity {
+public class BuildingFirstAppActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_first_app);
+        setContentView(R.layout.activity_building_first_app);
         changeTitle();
     }
 
