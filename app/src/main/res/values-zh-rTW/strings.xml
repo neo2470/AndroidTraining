@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">安卓練習</string>
+    <string name="action_settings">設置</string>
+    <string name="not_finished">尚未完成</string>
+    <string name="support_different_devices">支援不同的設備語言</string>
+</resources>

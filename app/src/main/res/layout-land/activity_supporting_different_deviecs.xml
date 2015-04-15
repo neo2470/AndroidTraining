@@ -11,17 +11,17 @@
         android:layout_marginBottom="5dp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/support_different_devices"
         android:background="#410000ff"
         android:gravity="center"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Orientation:vertical"
+        android:text="Orientation:horizontal"
         android:textSize="20sp"/>
 
 </LinearLayout>
