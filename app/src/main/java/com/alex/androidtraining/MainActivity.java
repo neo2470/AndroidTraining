@@ -38,6 +38,9 @@ public class MainActivity extends BaseActivity {
             case 3:
                 act = SupportingDifferentDevicesActivity.class;
                 break;
+            case 4:
+                act = ManagingActivityLifecycleActivity.class;
+                break;
         }
 
         if (null != act) {
