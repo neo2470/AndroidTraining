@@ -4,4 +4,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/beautiful_girl" />
+
+    <Switch
+        android:id="@+id/switchBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:textOff="Hide Action Bar"
+        android:textOn="Show Action Bar" />
+
 </LinearLayout>

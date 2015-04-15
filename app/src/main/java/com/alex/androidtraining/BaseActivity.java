@@ -22,6 +22,6 @@ public class BaseActivity extends Activity {
     protected void changeTitle() {
         Intent intent = getIntent();
         TitleBar titleBar = (TitleBar) findViewById(R.id.titleBar);
-        titleBar.setTitle(intent.getStringExtra("topic"));
+        titleBar.setTitle(intent.getStringExtra(MainActivity.TOPIC));
     }
 }

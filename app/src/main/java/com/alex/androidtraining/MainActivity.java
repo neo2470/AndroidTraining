@@ -35,14 +35,19 @@ public class MainActivity extends BaseActivity {
             case 2:
                 act = AddingActionBarActivity.class;
                 break;
+            case 3:
+                act = SupportingDifferentDevicesActivity.class;
+                break;
         }
 
         if (null != act) {
             Intent intent = new Intent(this, act);
-            intent.putExtra("topic", data[id]);
+            intent.putExtra(TOPIC, data[id]);
             startActivity(intent);
         }
     }
+
+    public final static String TOPIC = "com.alex.androidtraining.TOPIC";
 
     private final String[] data = {
 

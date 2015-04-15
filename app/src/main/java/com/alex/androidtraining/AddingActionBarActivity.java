@@ -5,19 +5,24 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 /**
  * Created by alex on 15-4-14.
  * Getting Started / Adding the Action Bar
  */
-public class AddingActionBarActivity extends Activity {
+public class AddingActionBarActivity extends Activity implements CompoundButton.OnCheckedChangeListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding_action_bar);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Switch switchBtn = (Switch) findViewById(R.id.switchBtn);
+        switchBtn.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -38,6 +43,15 @@ public class AddingActionBarActivity extends Activity {
                 return true;
             default :
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if(isChecked) {
+            getActionBar().show();
+        } else {
+            getActionBar().hide();
         }
     }
 }
