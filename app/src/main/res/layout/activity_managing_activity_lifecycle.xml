@@ -10,4 +10,30 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp" />
 
+    <Button
+        android:id="@+id/alertDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Alert Dialog" />
+
+    <Button
+        android:id="@+id/startActivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Start Dialog Activity" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Input Something" />
+
+    <TextView
+        android:id="@+id/lifeCycle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp" />
+
 </LinearLayout>
