@@ -41,6 +41,9 @@ public class MainActivity extends BaseActivity {
             case 4:
                 act = ManagingActivityLifecycleActivity.class;
                 break;
+            case 5:
+                act = DynamicUIWithFragmentActivity.class;
+                break;
         }
 
         if (null != act) {

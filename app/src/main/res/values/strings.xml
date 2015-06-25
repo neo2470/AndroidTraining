@@ -4,4 +4,21 @@
     <string name="action_settings">Settings</string>
     <string name="not_finished">Not Finished</string>
     <string name="support_different_devices">Support Different Languages</string>
+
+    <string-array name="article_headlines">
+        <item>Article 1</item>
+        <item>Article 2</item>
+        <item>Article 3</item>
+        <item>Article 4</item>
+        <item>Article 5</item>
+        <item>Article 6</item>
+        <item>Article 7</item>
+        <item>Article 8</item>
+        <item>Article 9</item>
+        <item>Article 10</item>
+        <item>Article 11</item>
+        <item>Article 12</item>
+        <item>Article 13</item>
+        <item>Article 14</item>
+    </string-array>
 </resources>
