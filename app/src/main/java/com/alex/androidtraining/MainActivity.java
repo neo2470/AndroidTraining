@@ -44,6 +44,9 @@ public class MainActivity extends BaseActivity {
             case 5:
                 act = DynamicUIWithFragmentActivity.class;
                 break;
+            case 6:
+                act = SavingDataActivity.class;
+                break;
         }
 
         if (null != act) {
