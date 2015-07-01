@@ -4,24 +4,85 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/inputValue"
-        android:hint="输入要保存的数据"/>
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/writePref"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="Write Key-Value Sets" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <Button
-        android:id="@+id/readPref"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onClick"
-        android:text="Read Key-Value Sets" />
+            <EditText
+                android:id="@+id/inputValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="something to save" />
+
+            <Button
+                android:id="@+id/writePref"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="Write Key-Value Sets"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/readPref"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="Read Key-Value Sets"
+                android:textAllCaps="false" />
+
+            <EditText
+                android:id="@+id/fileInternalValue"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="left|top"
+                android:hint="somthing to write into a internal file" />
+
+            <Button
+                android:id="@+id/writeInternalStorage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="Write Internal Storage"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/readInternalStorage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="Read Internal Storage"
+                android:textAllCaps="false" />
+
+            <EditText
+                android:id="@+id/fileExternalValue"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="left|top"
+                android:hint="somthing to write into a external file" />
+
+            <Button
+                android:id="@+id/writeExternalStorage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="Write Internal Storage"
+                android:textAllCaps="false" />
+
+            <Button
+                android:id="@+id/readExternalStorage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="Read Internal Storage"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
