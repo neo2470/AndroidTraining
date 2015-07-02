@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -39,6 +41,12 @@ public class SavingDataActivity extends Activity {
                 break;
             case R.id.readInternalStorage:
                 readStringFromInternalStorage();
+                break;
+            case R.id.writeExternalStorage:
+                writeString2ExternalStorage();
+                break;
+            case R.id.readExternalStorage:
+                readStringFromExternalStorage();
                 break;
         }
     }
@@ -89,7 +97,6 @@ public class SavingDataActivity extends Activity {
         try {
             inputStream = openFileInput(INTERNAL_FILE_NAME);
 
-            // TODO read string form internal storage
             BufferedReader buffer = new BufferedReader(new InputStreamReader(inputStream));
             String line;
             while (null != (line=buffer.readLine())) {
@@ -113,8 +120,63 @@ public class SavingDataActivity extends Activity {
         Toast.makeText(this,builder.toString(), Toast.LENGTH_SHORT).show();
     }
 
+    private void writeString2ExternalStorage() {
+        EditText editText = (EditText) findViewById(R.id.fileExternalValue);
+        String value = editText.getText().toString().trim();
+
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),EXTERNAL_FILE_NAME);
+
+        FileOutputStream outputStream = null;
+        try {
+            outputStream = new FileOutputStream(file);
+            outputStream.write(value.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(null != outputStream) {
+                    outputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void readStringFromExternalStorage() {
+
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), EXTERNAL_FILE_NAME);
+        FileInputStream inputStream = null;
+        StringBuilder builder = new StringBuilder();
+
+        try {
+            inputStream = new FileInputStream(file);
+            BufferedReader buffer = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+
+            while (null != (line=buffer.readLine())) {
+                builder.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(null != inputStream) {
+                    inputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Toast.makeText(this,builder.toString(), Toast.LENGTH_SHORT).show();
+    }
+
+
+
 
     private static final String KEY = "com.alex.androidtraining.TEST_KEY";
     private static final String PREFS_FILE_NAME = "com.alex.androidtraining.";
     private static final String INTERNAL_FILE_NAME = "internal_test_file";
+    private static final String EXTERNAL_FILE_NAME = "external_test_file.txt";
 }
