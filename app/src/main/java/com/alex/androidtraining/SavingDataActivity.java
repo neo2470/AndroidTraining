@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ public class SavingDataActivity extends Activity {
 
         dbHelper = new SQLiteHelper(this);
         operation = (TextView) findViewById(R.id.operation);
+        name = (EditText) findViewById(R.id.name);
+        age = (EditText) findViewById(R.id.age);
     }
 
     public void onClick(View view) {
@@ -61,13 +64,13 @@ public class SavingDataActivity extends Activity {
                 insertContacts();
                 break;
             case R.id.dbDelete:
-                ;
+                deleteContacts();
                 break;
             case R.id.dbUpdate:
-                ;
+                updateContacts();
                 break;
             case R.id.dbQuery:
-                ;
+                queryContacts();
                 break;
         }
     }
@@ -120,7 +123,7 @@ public class SavingDataActivity extends Activity {
 
             BufferedReader buffer = new BufferedReader(new InputStreamReader(inputStream));
             String line;
-            while (null != (line=buffer.readLine())) {
+            while (null != (line = buffer.readLine())) {
                 builder.append(line);
             }
 
@@ -138,14 +141,14 @@ public class SavingDataActivity extends Activity {
             }
         }
 
-        Toast.makeText(this,builder.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, builder.toString(), Toast.LENGTH_SHORT).show();
     }
 
     private void writeString2ExternalStorage() {
         EditText editText = (EditText) findViewById(R.id.fileExternalValue);
         String value = editText.getText().toString().trim();
 
-        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS),EXTERNAL_FILE_NAME);
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS), EXTERNAL_FILE_NAME);
 
         FileOutputStream outputStream = null;
         try {
@@ -155,7 +158,7 @@ public class SavingDataActivity extends Activity {
             e.printStackTrace();
         } finally {
             try {
-                if(null != outputStream) {
+                if (null != outputStream) {
                     outputStream.close();
                 }
             } catch (IOException e) {
@@ -175,14 +178,14 @@ public class SavingDataActivity extends Activity {
             BufferedReader buffer = new BufferedReader(new InputStreamReader(inputStream));
             String line;
 
-            while (null != (line=buffer.readLine())) {
+            while (null != (line = buffer.readLine())) {
                 builder.append(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
-                if(null != inputStream) {
+                if (null != inputStream) {
                     inputStream.close();
                 }
             } catch (IOException e) {
@@ -190,19 +193,27 @@ public class SavingDataActivity extends Activity {
             }
         }
 
-        Toast.makeText(this,builder.toString(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, builder.toString(), Toast.LENGTH_SHORT).show();
     }
 
     private void insertContacts() {
-        EditText name = (EditText) findViewById(R.id.name);
-        EditText age = (EditText) findViewById(R.id.age);
-        final String nameValue = name.getText().toString().trim();
-        final int ageValue = Integer.parseInt(age.getText().toString().trim());
 
-        if("".equals(nameValue)) {
+
+        final String nameValue = name.getText().toString().trim();
+        String ageStr = age.getText().toString().trim();
+
+
+        if ("".equals(nameValue)) {
             Toast.makeText(this, "Name can not be null", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        if ("".equals(ageStr)) {
+            Toast.makeText(this, "Age can not be null", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final int ageValue = Integer.parseInt(ageStr);
 
         new AsyncTask<Void, Void, Boolean>() {
 
@@ -224,7 +235,7 @@ public class SavingDataActivity extends Activity {
             protected void onPostExecute(Boolean flag) {
                 super.onPostExecute(flag);
 
-                if(flag) {
+                if (flag) {
                     operation.setText("Insert Success");
                 } else {
                     operation.setText("Insert Failure");
@@ -235,6 +246,150 @@ public class SavingDataActivity extends Activity {
 
     }
 
+    private void deleteContacts() {
+
+        final String nameValue = name.getText().toString().trim();
+
+        if ("".equals(nameValue)) {
+            Toast.makeText(this, "Name can not be null", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        new AsyncTask<Void, Void, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(Void... params) {
+
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                String where = Contacts.Column.NAME + " = ?";
+
+                int flag = db.delete(Contacts.TABLE_NAME, where, new String[]{nameValue});
+                return 0 != flag;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean flag) {
+                super.onPostExecute(flag);
+
+                if (flag) {
+                    operation.setText("Delete Success");
+                } else {
+                    operation.setText("Delete Failure");
+                }
+            }
+        }.execute();
+    }
+
+    private void updateContacts() {
+        final String nameValue = name.getText().toString().trim();
+        String ageStr = age.getText().toString().trim();
+
+        if ("".equals(nameValue)) {
+            Toast.makeText(this, "Name can not be null", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if ("".equals(ageStr)) {
+            Toast.makeText(this, "Age can not be null", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        final int ageValue = Integer.parseInt(ageStr);
+
+        new AsyncTask<Void, Void, Boolean>() {
+
+            @Override
+            protected Boolean doInBackground(Void... params) {
+
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                ContentValues values = new ContentValues();
+                values.put(Contacts.Column.AGE, ageValue);
+
+                String where = Contacts.Column.NAME + " = ?";
+                String[] whereArgs = new String[] {nameValue};
+                int flag = db.update(Contacts.TABLE_NAME, values, where, whereArgs);
+
+                return 0 != flag;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean flag) {
+                super.onPostExecute(flag);
+
+                if (flag) {
+                    operation.setText("Update Success");
+                } else {
+                    operation.setText("Update Failure");
+                }
+            }
+        }.execute();
+    }
+
+    private void queryContacts() {
+
+        final String nameValue = name.getText().toString().trim();
+        boolean queryAll = false;
+
+        if ("".equals(nameValue)) {
+            queryAll = true;
+        }
+
+        new AsyncTask<Boolean,Void,String>(){
+
+            @Override
+            protected String doInBackground(Boolean... params) {
+
+                boolean selectAll = params[0];
+
+                SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+                String where = null;
+                String[] whereArgs = null;
+                if(!selectAll) {
+                    where = Contacts.Column.NAME + " = ?";
+                    whereArgs = new String[] {nameValue};
+                }
+                String order = Contacts.Column.AGE + " ASC";
+
+                Cursor cursor = db.query(Contacts.TABLE_NAME, null, where, whereArgs, null, null, order);
+                StringBuilder builder = new StringBuilder();
+
+                if(0 == cursor.getCount()) {
+                    builder.append("Nothing is queried!");
+
+                    return builder.toString();
+                }
+
+                while(cursor.moveToNext()) {
+                    int index = cursor.getInt(cursor.getColumnIndex(Contacts.Column._ID));
+                    String name = cursor.getString(cursor.getColumnIndex(Contacts.Column.NAME));
+                    int age = cursor.getInt(cursor.getColumnIndex(Contacts.Column.AGE));
+
+                    builder.append(index);
+                    builder.append(", ");
+                    builder.append(name);
+                    builder.append(", ");
+                    builder.append(age);
+
+                    if(!cursor.isLast()) {
+                        builder.append("\n");
+                    }
+                }
+                cursor.close();
+
+                return builder.toString();
+            }
+
+            @Override
+            protected void onPostExecute(String data) {
+                super.onPostExecute(data);
+                operation.setText(data);
+            }
+        }.execute(queryAll);
+    }
+
 
     private static final String KEY = "com.alex.androidtraining.TEST_KEY";
     private static final String PREFS_FILE_NAME = "com.alex.androidtraining.";
@@ -243,4 +398,6 @@ public class SavingDataActivity extends Activity {
 
     private SQLiteHelper dbHelper;
     private TextView operation;
+    private EditText name;
+    private EditText age;
 }

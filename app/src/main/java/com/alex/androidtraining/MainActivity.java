@@ -47,6 +47,9 @@ public class MainActivity extends BaseActivity {
             case 6:
                 act = SavingDataActivity.class;
                 break;
+            case 7:
+                act = InteractingWithOtherApp.class;
+                break;
         }
 
         if (null != act) {
