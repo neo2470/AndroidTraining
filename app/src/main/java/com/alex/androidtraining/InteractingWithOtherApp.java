@@ -23,6 +23,19 @@ public class InteractingWithOtherApp extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interacting_with_other_app);
+
+        Intent intent = getIntent();
+        Uri data = intent.getData();
+
+        String type = intent.getType();
+        if(null != type) {
+
+            if ("image/".contains(type)) {
+                Toast.makeText(this, "image, " + data.toString(), Toast.LENGTH_SHORT).show();
+            } else if ("text/plain".equals(type)) {
+                Toast.makeText(this, "text/plain, " + data.toString(), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     @Override
@@ -76,6 +89,9 @@ public class InteractingWithOtherApp extends Activity {
                 Intent share = new Intent(Intent.ACTION_SEND);
 
                 Intent chooser = Intent.createChooser(share, "Share");
+                chooser.setType("text/plain");
+                Uri uri = Uri.parse("android.intent.action.SEND.TEST_DATA");
+                chooser.setData(uri);
 
                 if(hasActivity2startByIntent(share)) {
                     startActivity(chooser);

@@ -84,6 +84,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.send" />
+                <category android:name="android.intent.category.default" />
+                <data android:mimeType="text/plain" />
+                <data android:mimeType="image/*" />
+            </intent-filter>
         </activity>
     </application>
 
