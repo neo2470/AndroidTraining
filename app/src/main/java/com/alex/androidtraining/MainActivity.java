@@ -2,10 +2,13 @@ package com.alex.androidtraining;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class MainActivity extends BaseActivity {
 
@@ -50,6 +53,9 @@ public class MainActivity extends BaseActivity {
             case 7:
                 act = InteractingWithOtherApp.class;
                 break;
+            case 24:
+                act = RunningInBackgroundService.class;
+                break;
         }
 
         if (null != act) {
@@ -63,33 +69,38 @@ public class MainActivity extends BaseActivity {
 
     private final String[] data = {
 
-            "Getting Started",
-            "           Building Your First App",
-            "           Adding the Action Bar",
-            "           Supporting Different Devices",
-            "           Managing the Activity Lifecycle",
-            "           Building a Dynamic UI with Fragment",
-            "           Saving Data",
-            "           Interacting with Other Apps",
+            "Getting Started",// 0
+            "           Building Your First App",// 1
+            "           Adding the Action Bar",// 2
+            "           Supporting Different Devices",// 3
+            "           Managing the Activity Lifecycle",// 4
+            "           Building a Dynamic UI with Fragment",// 5
+            "           Saving Data",// 6
+            "           Interacting with Other Apps",// 7
 
-            "Content Sharing",
-            "           Sharing Simple Data",
-            "           Sharing Files",
-            "           Sharing Files with NFC",
+            "Content Sharing",// 8
+            "           Sharing Simple Data",// 9
+            "           Sharing Files",// 10
+            "           Sharing Files with NFC",// 11
 
-            "Multimedia",
-            "           Managing Audio Playback",
-            "           Capturing Photos",
-            "           Printing Content",
+            "Multimedia",// 12
+            "           Managing Audio Playback",// 13
+            "           Capturing Photos",// 14
+            "           Printing Content",// 15
 
-            "Graphic & Animation",
-            "           Displaying Bitmaps Efficiently",
-            "           Displaying Graphics with OpenGL ES",
-            "           Animating Views Using Scenes and Transitions",
-            "           Adding Animations",
+            "Graphic & Animation",// 16
+            "           Displaying Bitmaps Efficiently",// 17
+            "           Displaying Graphics with OpenGL ES",// 18
+            "           Animating Views Using Scenes and Transitions",// 19
+            "           Adding Animations",// 20
 
-            "Connectivity & the Cloud",
+            "Connectivity & the Cloud",// 21
 
-            "User info & Location",
+            "User info & Location",// 22
+
+            "Best Practices for Background Jobs",// 23
+            "           Running in a Background Service",// 24
+            "           Loading data in the Background",// 25
+            "           Managing Device Awake State",// 26
     };
 }
